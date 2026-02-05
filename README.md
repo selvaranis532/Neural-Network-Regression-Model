@@ -43,39 +43,74 @@ Plot the performance plot
 Evaluate the model with the testing data.
 
 ## PROGRAM
-### Name:
-### Register Number:
-```python
+### Name: SELVARANI S
+### Register Number:212224040301
+```
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("/dataset.csv")
+
+X = torch.tensor(data.iloc[:,0].values, dtype=torch.float32).view(-1,1)
+Y = torch.tensor(data.iloc[:,1].values, dtype=torch.float32).view(-1,1)
+
+X = X / X.max()
+
 class NeuralNet(nn.Module):
     def __init__(self):
         super().__init__()
-        #Include your code here
+        self.fc1 = nn.Linear(1,10)
+        self.fc2 = nn.Linear(10,1)
+        self.relu = nn.ReLU()
 
+    def forward(self,x):
+        x = self.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
 
+ai_brain = NeuralNet()
+criterion = nn.MSELoss()
+optimizer = optim.Adam(ai_brain.parameters(), lr=0.01)
 
-# Initialize the Model, Loss Function, and Optimizer
+def train_model(ai_brain, X, Y, criterion, optimizer, epochs=500):
+    losses = []
+    for epoch in range(epochs):
+        optimizer.zero_grad()
+        output = ai_brain(X)
+        loss = criterion(output, Y)
+        loss.backward()
+        optimizer.step()
+        losses.append(loss.item())
+    return losses
 
+losses = train_model(ai_brain, X, Y, criterion, optimizer)
 
-
-def train_model(ai_brain, X_train, y_train, criterion, optimizer, epochs=2000):
-    #Include your code here
-
+plt.plot(losses)
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.title("Training Loss vs Epochs")
+plt.show()
 
 
 ```
 ## Dataset Information
 
-Include screenshot of the dataset
+<img width="278" height="468" alt="image" src="https://github.com/user-attachments/assets/372ab362-14a4-4bbe-9f2f-d4673b4e371b" />
 
 ## OUTPUT
 
 ### Training Loss Vs Iteration Plot
 
-Include your plot here
+<img width="759" height="580" alt="image" src="https://github.com/user-attachments/assets/83fd499d-5f50-483e-abdc-6f1d1973a814" />
+
 
 ### New Sample Data Prediction
 
-Include your sample input and output here
+<img width="643" height="131" alt="image" src="https://github.com/user-attachments/assets/8eaf885a-ec07-426f-a730-8ebb8246ee49" />
+
 
 ## RESULT
 
