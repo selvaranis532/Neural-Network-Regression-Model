@@ -45,55 +45,42 @@ Evaluate the model with the testing data.
 ## PROGRAM
 ### Name: SELVARANI S
 ### Register Number:212224040301
+
 ```
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import pandas as pd
-import matplotlib.pyplot as plt
-
-data = pd.read_csv("/dataset.csv")
-
-X = torch.tensor(data.iloc[:,0].values, dtype=torch.float32).view(-1,1)
-Y = torch.tensor(data.iloc[:,1].values, dtype=torch.float32).view(-1,1)
-
-X = X / X.max()
-
 class NeuralNet(nn.Module):
     def __init__(self):
         super().__init__()
-        self.fc1 = nn.Linear(1,10)
-        self.fc2 = nn.Linear(10,1)
+        self.fc1 = nn.Linear(1, 8)
+        self.fc2 = nn.Linear(8, 10)
+        self.fc3 = nn.Linear(10, 1)
         self.relu = nn.ReLU()
+        self.history = {'loss': []}
 
-    def forward(self,x):
+    def forward(self, x):
         x = self.relu(self.fc1(x))
-        x = self.fc2(x)
+        x = self.relu(self.fc2(x))
+        x = self.fc3(x)  
         return x
 
-ai_brain = NeuralNet()
-criterion = nn.MSELoss()
-optimizer = optim.Adam(ai_brain.parameters(), lr=0.01)
 
-def train_model(ai_brain, X, Y, criterion, optimizer, epochs=500):
-    losses = []
+# Initialize the Model, Loss Function, and Optimizer
+
+sel_brain = NeuralNet()
+criterion = nn.MSELoss()
+optimizer = optim.RMSprop(sel_brain.parameters(), lr=0.001)
+
+def train_model(sel_brain, X_train, y_train, criterion, optimizer, epochs=2000):
     for epoch in range(epochs):
         optimizer.zero_grad()
-        output = ai_brain(X)
-        loss = criterion(output, Y)
+        loss = criterion(sel_brain(X_train), y_train)
         loss.backward()
         optimizer.step()
-        losses.append(loss.item())
-    return losses
 
-losses = train_model(ai_brain, X, Y, criterion, optimizer)
+        sel_brain.history['loss'].append(loss.item())
+        if epoch % 200 == 0:
+            print(f'Epoch [{epoch}/{epochs}], Loss: {loss.item():.6f}')
 
-plt.plot(losses)
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Training Loss vs Epochs")
-plt.show()
-
+       
 
 ```
 ## Dataset Information
@@ -102,14 +89,19 @@ plt.show()
 
 ## OUTPUT
 
+<img width="1049" height="337" alt="image" src="https://github.com/user-attachments/assets/99b19340-cec9-4efb-97e4-87c1ee454f81" />
+
+
 ### Training Loss Vs Iteration Plot
 
-<img width="759" height="580" alt="image" src="https://github.com/user-attachments/assets/83fd499d-5f50-483e-abdc-6f1d1973a814" />
+<img width="833" height="633" alt="image" src="https://github.com/user-attachments/assets/ce3c2340-2d8e-4cd5-bc8e-c03fb65049ff" />
+
 
 
 ### New Sample Data Prediction
 
-<img width="643" height="131" alt="image" src="https://github.com/user-attachments/assets/8eaf885a-ec07-426f-a730-8ebb8246ee49" />
+<img width="1350" height="148" alt="image" src="https://github.com/user-attachments/assets/99b9c49d-fcd2-4da2-83cb-0def7941a3f7" />
+
 
 
 ## RESULT
