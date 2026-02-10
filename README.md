@@ -5,8 +5,7 @@
 To develop a neural network regression model for the given dataset.
 
 ## THEORY
-
-Explain the problem statement
+Regression problems aim to predict a continuous numerical value based on input features. Traditional regression models may fail to capture complex non-linear relationships. A Neural Network Regression Model uses multiple layers of neurons to learn these non-linear patterns and improve prediction accuracy.
 
 ## Neural Network Model
 
