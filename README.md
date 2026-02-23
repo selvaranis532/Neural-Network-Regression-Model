@@ -9,7 +9,8 @@ Regression problems aim to predict a continuous numerical value based on input f
 
 ## Neural Network Model
 
-Include the neural network model diagram.
+<img width="944" height="624" alt="image" src="https://github.com/user-attachments/assets/8a679ad6-7051-4900-952d-9a86ac9ceef7" />
+
 
 ## DESIGN STEPS
 
@@ -64,18 +65,18 @@ class NeuralNet(nn.Module):
 
 # Initialize the Model, Loss Function, and Optimizer
 
-sel_brain = NeuralNet()
+selva_brain = NeuralNet()
 criterion = nn.MSELoss()
 optimizer = optim.RMSprop(sel_brain.parameters(), lr=0.001)
 
-def train_model(sel_brain, X_train, y_train, criterion, optimizer, epochs=2000):
+def train_model(selva_brain, X_train, y_train, criterion, optimizer, epochs=2000):
     for epoch in range(epochs):
         optimizer.zero_grad()
         loss = criterion(sel_brain(X_train), y_train)
         loss.backward()
         optimizer.step()
 
-        sel_brain.history['loss'].append(loss.item())
+        selva_brain.history['loss'].append(loss.item())
         if epoch % 200 == 0:
             print(f'Epoch [{epoch}/{epochs}], Loss: {loss.item():.6f}')
 
