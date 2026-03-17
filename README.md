@@ -67,7 +67,7 @@ class NeuralNet(nn.Module):
 
 selva_brain = NeuralNet()
 criterion = nn.MSELoss()
-optimizer = optim.RMSprop(sel_brain.parameters(), lr=0.001)
+optimizer = optim.RMSprop(selva_brain.parameters(), lr=0.001)
 
 def train_model(selva_brain, X_train, y_train, criterion, optimizer, epochs=2000):
     for epoch in range(epochs):
@@ -89,12 +89,11 @@ def train_model(selva_brain, X_train, y_train, criterion, optimizer, epochs=2000
 
 ## OUTPUT
 
-<img width="1049" height="337" alt="image" src="https://github.com/user-attachments/assets/99b19340-cec9-4efb-97e4-87c1ee454f81" />
-
-
+<img width="925" height="306" alt="image" src="https://github.com/user-attachments/assets/75fd3901-4561-49dd-aef4-49f652a62ee6" />
 ### Training Loss Vs Iteration Plot
 
-<img width="833" height="633" alt="image" src="https://github.com/user-attachments/assets/ce3c2340-2d8e-4cd5-bc8e-c03fb65049ff" />
+
+<img width="785" height="588" alt="image" src="https://github.com/user-attachments/assets/86fa16be-0f6e-4b81-acc3-f998cf03ee38" />
 
 
 
