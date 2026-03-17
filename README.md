@@ -100,7 +100,8 @@ def train_model(selva_brain, X_train, y_train, criterion, optimizer, epochs=2000
 
 ### New Sample Data Prediction
 
-<img width="1350" height="148" alt="image" src="https://github.com/user-attachments/assets/99b9c49d-fcd2-4da2-83cb-0def7941a3f7" />
+<img width="814" height="299" alt="image" src="https://github.com/user-attachments/assets/3b824ba8-ac22-4ebb-8c20-369a381436b3" />
+
 
 
 
