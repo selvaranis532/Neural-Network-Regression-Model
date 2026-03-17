@@ -90,6 +90,7 @@ def train_model(selva_brain, X_train, y_train, criterion, optimizer, epochs=2000
 ## OUTPUT
 
 <img width="925" height="306" alt="image" src="https://github.com/user-attachments/assets/75fd3901-4561-49dd-aef4-49f652a62ee6" />
+
 ### Training Loss Vs Iteration Plot
 
 
